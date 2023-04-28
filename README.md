@@ -16,6 +16,10 @@ language:
 thumbnail: https://user-images.githubusercontent.com/5068315/230698495-cbb1ced9-c911-4c9a-941d-a1a4a1286ac6.png
 library: "bark"
 license: "cc-by-nc-4.0"
+tags:
+- bark
+- audio
+- text-to-speech
 ---
 
 # Bark
