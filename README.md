@@ -24,9 +24,17 @@ tags:
 
 # Bark
 
-This is the official codebase for running the text to audio model, from [Suno.ai](www.suno.ai).
+Bark is a transformer-based text-to-audio model created by [Suno](https://www.suno.ai). 
+Bark can generate highly realistic, multilingual speech as well as other audio - including music, 
+background noise and simple sound effects. The model can also produce nonverbal 
+communications like laughing, sighing and crying. To support the research community, 
+we are providing access to pretrained model checkpoints ready for inference.
 
-The original github repo and model card can be found [here](https://github.com/suno-ai/bark)
+The original github repo and model card can be found [here](https://github.com/suno-ai/bark).
+
+This model is meant for research purposes only. 
+The model output is not censored and the authors do not endorse the opinions in the generated content. 
+Use at your own risk.
 
 The following is additional information about the models released here. 
 
@@ -80,9 +88,9 @@ Bark is a series of three transformer models that turn text into audio.
 ### Architecture
 |           Model           | Parameters | Attention  | Output Vocab size |  
 |:-------------------------:|:----------:|------------|:-----------------:|
-|  Text to semantic tokens  |    80 M    | Causal     |       10,000      |
-| Semantic to coarse tokens |    80 M    | Causal     |     2x 1,024      |
-|   Coarse to fine tokens   |    80 M    | Non-causal |     6x 1,024      |
+|  Text to semantic tokens  |    80/300 M    | Causal     |       10,000      |
+| Semantic to coarse tokens |    80/300 M    | Causal     |     2x 1,024      |
+|   Coarse to fine tokens   |    80/300 M    | Non-causal |     6x 1,024      |
 
 
 ### Release date
@@ -90,9 +98,8 @@ April 2023
 
 ## Broader Implications
 We anticipate that this model's text to audio capabilities can be used to improve accessbility tools in a variety of languages. 
-Straightforward improvements will allow models to run faster than realtime, rendering them useful for applications such as virtual assistants. 
  
 While we hope that this release will enable users to express their creativity and build applications that are a force
 for good, we acknowledge that any text to audio model has the potential for dual use. While it is not straightforward
-to voice clone known people with Bark, they can still be used for nefarious purposes. To further reduce the chances of unintended use of Bark, 
+to voice clone known people with Bark, it can still be used for nefarious purposes. To further reduce the chances of unintended use of Bark, 
 we also release a simple classifier to detect Bark-generated audio with high accuracy (see notebooks section of the main repository). 
