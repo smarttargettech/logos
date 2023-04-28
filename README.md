@@ -24,7 +24,9 @@ tags:
 
 # Bark
 
-This is the official codebase for running the text to audio model, from Suno.ai.
+This is the official codebase for running the text to audio model, from [Suno.ai](www.suno.ai).
+
+The original github repo and model card can be found [here](https://github.com/suno-ai/bark)
 
 The following is additional information about the models released here. 
 
