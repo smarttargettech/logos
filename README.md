@@ -15,7 +15,7 @@ language:
   - zh
 thumbnail: https://user-images.githubusercontent.com/5068315/230698495-cbb1ced9-c911-4c9a-941d-a1a4a1286ac6.png
 library: "bark"
-license: "CC-BY 4.0 NC"
+license: "cc-by-nc-4.0"
 ---
 
 # Bark
@@ -23,6 +23,37 @@ license: "CC-BY 4.0 NC"
 This is the official codebase for running the text to audio model, from Suno.ai.
 
 The following is additional information about the models released here. 
+
+## Model Usage
+
+```python
+from bark import SAMPLE_RATE, generate_audio, preload_models
+from IPython.display import Audio
+
+# download and load all models
+preload_models()
+
+# generate audio from text
+text_prompt = """
+     Hello, my name is Suno. And, uh — and I like pizza. [laughs] 
+     But I also have other interests such as playing tic tac toe.
+"""
+audio_array = generate_audio(text_prompt)
+
+# play text in notebook
+Audio(audio_array, rate=SAMPLE_RATE)
+```
+
+[pizza.webm](https://user-images.githubusercontent.com/5068315/230490503-417e688d-5115-4eee-9550-b46a2b465ee3.webm)
+
+
+To save `audio_array` as a WAV file:
+
+```python
+from scipy.io.wavfile import write as write_wav
+
+write_wav("/path/to/audio.wav", SAMPLE_RATE, audio_array)
+```
 
 ## Model Details
 
