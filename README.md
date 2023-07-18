@@ -36,9 +36,89 @@ This model is meant for research purposes only.
 The model output is not censored and the authors do not endorse the opinions in the generated content. 
 Use at your own risk.
 
-The following is additional information about the models released here. 
+Two checkpoints are released:
+- [small](https://huggingface.co/suno/bark-small)
+- [**large** (this checkpoint)](https://huggingface.co/suno/bark)
 
-## Model Usage
+
+## Example
+
+Try out Bark yourself!
+
+* Bark Colab:
+
+<a target="_blank" href="https://colab.research.google.com/drive/1eJfA2XUa-mXwdMy7DoYKVYHI1iTd9Vkt?usp=sharing">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+* Hugging Face Colab:
+
+<a target="_blank" href="https://colab.research.google.com/drive/1dWWkZzvu7L9Bunq9zvD-W02RFUXoW-Pd?usp=sharing"> 
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> 
+</a>
+
+* Hugging Face Demo:
+
+<a target="_blank" href="https://huggingface.co/spaces/suno/bark">
+  <img src="https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg" alt="Open in HuggingFace"/>
+</a>
+
+
+## 🤗 Transformers Usage
+
+
+You can run Bark locally with the 🤗 Transformers library from version 4.31.0 onwards.
+
+1. First install the 🤗 [Transformers library](https://github.com/huggingface/transformers) from main:
+
+```
+pip install git+https://github.com/huggingface/transformers.git
+```
+
+2. Run the following Python code to generate speech samples:
+
+```python
+from transformers import AutoProcessor, AutoModel
+
+
+processor = AutoProcessor.from_pretrained("suno/bark-small")
+model = AutoModel.from_pretrained("suno/bark-small")
+
+inputs = processor(
+    text=["Hello, my name is Suno. And, uh — and I like pizza. [laughs] But I also have other interests such as playing tic tac toe."],
+    return_tensors="pt",
+)
+
+speech_values = model.generate(**inputs, do_sample=True)
+```
+
+3. Listen to the speech samples either in an ipynb notebook:
+
+```python
+from IPython.display import Audio
+
+sampling_rate = model.generation_config.sample_rate
+Audio(speech_values.cpu().numpy().squeeze(), rate=sampling_rate)
+```
+
+Or save them as a `.wav` file using a third-party library, e.g. `scipy`:
+
+```python
+import scipy
+
+sampling_rate = model.config.sample_rate
+scipy.io.wavfile.write("bark_out.wav", rate=sampling_rate, data=speech_values.cpu().numpy().squeeze())
+```
+
+For more details on using the Bark model for inference using the 🤗 Transformers library, refer to the [Bark docs](https://huggingface.co/docs/transformers/model_doc/bark).
+
+## Suno Usage
+
+You can also run Bark locally through the original [Bark library]((https://github.com/suno-ai/bark):
+
+1. First install the [`bark` library](https://github.com/suno-ai/bark)
+
+3. Run the following Python code:
 
 ```python
 from bark import SAMPLE_RATE, generate_audio, preload_models
@@ -52,10 +132,10 @@ text_prompt = """
      Hello, my name is Suno. And, uh — and I like pizza. [laughs] 
      But I also have other interests such as playing tic tac toe.
 """
-audio_array = generate_audio(text_prompt)
+speech_array = generate_audio(text_prompt)
 
 # play text in notebook
-Audio(audio_array, rate=SAMPLE_RATE)
+Audio(speech_array, rate=SAMPLE_RATE)
 ```
 
 [pizza.webm](https://user-images.githubusercontent.com/5068315/230490503-417e688d-5115-4eee-9550-b46a2b465ee3.webm)
@@ -70,6 +150,9 @@ write_wav("/path/to/audio.wav", SAMPLE_RATE, audio_array)
 ```
 
 ## Model Details
+
+
+The following is additional information about the models released here. 
 
 Bark is a series of three transformer models that turn text into audio.
 
