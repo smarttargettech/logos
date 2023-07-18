@@ -1,25 +1,27 @@
 ---
-language: 
-  - en
-  - de
-  - es
-  - fr
-  - hi
-  - it
-  - ja
-  - ko
-  - pl
-  - pt
-  - ru
-  - tr
-  - zh
-thumbnail: https://user-images.githubusercontent.com/5068315/230698495-cbb1ced9-c911-4c9a-941d-a1a4a1286ac6.png
-library: "bark"
-license: "cc-by-nc-4.0"
+language:
+- en
+- de
+- es
+- fr
+- hi
+- it
+- ja
+- ko
+- pl
+- pt
+- ru
+- tr
+- zh
+thumbnail: >-
+  https://user-images.githubusercontent.com/5068315/230698495-cbb1ced9-c911-4c9a-941d-a1a4a1286ac6.png
+library: bark
+license: cc-by-nc-4.0
 tags:
 - bark
 - audio
 - text-to-speech
+pipeline_tag: text-to-speech
 ---
 
 # Bark
@@ -185,4 +187,4 @@ We anticipate that this model's text to audio capabilities can be used to improv
 While we hope that this release will enable users to express their creativity and build applications that are a force
 for good, we acknowledge that any text to audio model has the potential for dual use. While it is not straightforward
 to voice clone known people with Bark, it can still be used for nefarious purposes. To further reduce the chances of unintended use of Bark, 
-we also release a simple classifier to detect Bark-generated audio with high accuracy (see notebooks section of the main repository). 
+we also release a simple classifier to detect Bark-generated audio with high accuracy (see notebooks section of the main repository).
