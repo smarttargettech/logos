@@ -80,7 +80,7 @@
     "use_cache": true
   },
   "codec_config": {
-    "_name_or_path": "ArthurZ/encodec_24khz",
+    "_name_or_path": "facebook/encodec_24khz",
     "add_cross_attention": false,
     "architectures": [
       "EncodecModel"
