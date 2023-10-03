@@ -22,7 +22,7 @@ tags:
 - audio
 - text-to-speech
 pipeline_tag: text-to-speech
-inference: false
+inference: true
 ---
 
 # Bark
