@@ -69,23 +69,35 @@ Try out Bark yourself!
 
 ## 🤗 Transformers Usage
 
-
 You can run Bark locally with the 🤗 Transformers library from version 4.31.0 onwards.
 
-1. First install the 🤗 [Transformers library](https://github.com/huggingface/transformers) from main:
+1. First install the 🤗 [Transformers library](https://github.com/huggingface/transformers) and scipy:
 
 ```
-pip install git+https://github.com/huggingface/transformers.git
+pip install --upgrade pip
+pip install --upgrade transformers scipy
 ```
 
-2. Run the following Python code to generate speech samples:
+2. Run inference via the `Text-to-Speech` (TTS) pipeline. You can infer the bark model via the TTS pipeline in just a few lines of code!
+
+```python
+from transformers import pipeline
+import scipy
+
+synthesiser = pipeline("text-to-speech", "suno/bark")
+
+speech = synthesiser("Hello, my dog is cooler than you!", forward_params={"do_sample": True})
+
+scipy.io.wavfile.write("bark_out.wav", rate=speech["sampling_rate"], data=speech["audio"])
+```
+
+3. Run inference via the Transformers modelling code. You can use the processor + generate code to convert text into a mono 24 kHz speech waveform for more fine-grained control.
 
 ```python
 from transformers import AutoProcessor, AutoModel
 
-
-processor = AutoProcessor.from_pretrained("suno/bark-small")
-model = AutoModel.from_pretrained("suno/bark-small")
+processor = AutoProcessor.from_pretrained("suno/bark")
+model = AutoModel.from_pretrained("suno/bark")
 
 inputs = processor(
     text=["Hello, my name is Suno. And, uh — and I like pizza. [laughs] But I also have other interests such as playing tic tac toe."],
@@ -95,7 +107,7 @@ inputs = processor(
 speech_values = model.generate(**inputs, do_sample=True)
 ```
 
-3. Listen to the speech samples either in an ipynb notebook:
+4. Listen to the speech samples either in an ipynb notebook:
 
 ```python
 from IPython.display import Audio
@@ -121,7 +133,7 @@ You can also run Bark locally through the original [Bark library]((https://githu
 
 1. First install the [`bark` library](https://github.com/suno-ai/bark)
 
-3. Run the following Python code:
+2. Run the following Python code:
 
 ```python
 from bark import SAMPLE_RATE, generate_audio, preload_models
